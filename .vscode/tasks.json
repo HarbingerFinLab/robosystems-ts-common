@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Prisma DB Push",
+      "type": "shell",
+      "command": "npx prisma db push",
+      "problemMatcher": []
+    },
+    {
+      "label": "Prisma Migrate Dev",
+      "type": "shell",
+      "command": "npx prisma migrate dev",
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "problemMatcher": []
+    },
+    {
+      "label": "Update Dependencies",
+      "type": "shell",
+      "command": "npm update",
+      "problemMatcher": []
+    },
+    {
+      "label": "Create Release",
+      "type": "shell",
+      "command": "bash bin/create-release.sh ${input:versionType}",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "versionType",
+      "type": "pickString",
+      "description": "Select version type for release",
+      "options": ["major", "minor", "patch"],
+      "default": "patch"
+    }
+  ]
+}

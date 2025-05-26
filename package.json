@@ -1,0 +1,24 @@
+{
+  "name": "@robosystems/ts-common",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "push": "npx prisma db push",
+    "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
+    "postinstall": "npm run generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^6"
+  },
+  "devDependencies": {
+    "prisma": "^6"
+  }
+}
