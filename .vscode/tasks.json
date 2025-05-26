@@ -4,13 +4,13 @@
     {
       "label": "Prisma DB Push",
       "type": "shell",
-      "command": "npx prisma db push",
+      "command": "npm run db:push",
       "problemMatcher": []
     },
     {
       "label": "Prisma Migrate Dev",
       "type": "shell",
-      "command": "npx prisma migrate dev",
+      "command": "npm run db:migrate:dev",
       "problemMatcher": []
     },
     {
