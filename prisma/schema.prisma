@@ -19,9 +19,11 @@ model User {
   qbAuth        QBAuth[]
   plaidAuth     PlaidAuth[]
   apiKeys       APIKey[]
+  userGraphs    UserGraph[]
 
   @@index([id], type: Hash)
   @@index([name], type: Hash)
+  @@index([email], type: Hash)
 }
 
 model Account {
@@ -38,6 +40,7 @@ model Account {
   user               User      @relation(fields: [userId], references: [id])
 
   @@unique([providerId, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -49,6 +52,9 @@ model Session {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expires])
 }
 
 model VerificationRequest {
@@ -73,6 +79,7 @@ model QBAuth {
   user          User    @relation(fields: [userId], references: [id])
 
   @@unique([userId, realmId])
+  @@index([userId])
 }
 
 model APIKey {
@@ -91,6 +98,10 @@ model APIKey {
 
   @@index([key], type: Hash)
   @@index([userId], type: Hash)
+  @@index([graphId], type: Hash)
+  @@index([key, isActive, expiresAt])
+  @@index([key, graphId, isActive])
+  @@index([userId, isActive])
 }
 
 model PlaidAuth {
@@ -109,4 +120,23 @@ model PlaidAuth {
 
   @@unique([userId, itemId])
   @@index([itemId], type: Hash)
+  @@index([userId])
+  @@index([userId, companyId])
+}
+
+model UserGraph {
+  id          String   @id @default(cuid())
+  userId      String
+  graphId     String   // The graph database identifier
+  graphName   String   // Display name for the graph (usually first company name)
+  role        String   @default("ADMIN") // ADMIN, READ_WRITE, READ_ONLY
+  isSelected  Boolean  @default(false) // Currently selected graph for the user
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, graphId])
+  @@index([userId])
+  @@index([graphId])
+  @@index([userId, isSelected])
 }
