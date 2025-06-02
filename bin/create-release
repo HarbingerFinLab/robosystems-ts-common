@@ -3,7 +3,7 @@ set -e
 
 # Create release script for robosystems-app
 # Creates a new release branch and commits version changes
-# Usage: ./bin/create-release.sh [major|minor|patch]
+# Usage: ./bin/create-release [major|minor|patch]
 
 # Default to patch if no argument provided
 VERSION_TYPE=${1:-patch}

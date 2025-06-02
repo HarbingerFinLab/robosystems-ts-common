@@ -28,7 +28,7 @@
     {
       "label": "Create Release",
       "type": "shell",
-      "command": "bash bin/create-release.sh ${input:versionType}",
+      "command": "bash bin/create-release ${input:versionType}",
       "problemMatcher": []
     }
   ],
